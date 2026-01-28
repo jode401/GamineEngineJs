@@ -1,47 +1,40 @@
-const screenForm = document.getElementById('screenForm');
-const first = document.querySelector('.first')
+
+
 const body = document.querySelector('body')
+let div2 = document.createElement('div')
+class Screen {
 
-function create(a, b, c, d) {
-    let aire = a * b
-    let psquare = aire / c * d
-    let p = Math.sqrt(psquare)
-    let fpw = p / c
-    let fph = p / d
-    console.log(p)
-    let div = document.createElement('div')
-    div.style.backgroundColor = 'red'
-    div.style.height = `${fph}px`
-    div.style.width = `${fpw}px`
-    div.style.borderColor = 'blue'
-    return first.append(div)
+    static instanceExists = false
+    constructor(h, w, c = 'blue', sh, sw) {
+        this.h = h
+        this.w = w
+        this.c = c
+        this.sh = sh
+        this.sw = sw
+        this.rendered = false
+        if (Screen.instanceExists) {
+            throw new Error('Only one Screen instance is allowed')
+        }
+        Screen.instanceExists = true
+    }
+
+    sub() {
+        body.append(div2)
+        for (let i = 0; i < this.sh * this.sw; i++) {
+            let div = document.createElement('div')
+            div.style.backgroundColor = `${this.c}`
+            div.style.border = 'red 2px solid'
+            div.style.height = `${this.h / this.sh}px`
+            div.style.width = `${this.w / this.sw}px`
+
+            div2.style.height = `${this.h}px`
+            div2.style.backgroundColor = `${this.c}`
+            div2.style.width = `${this.w}px`
+            div2.style.display = 'grid'
+            div2.style.gridTemplateColumns = `repeat(${this.sh},1fr)`
+            div2.style.gridTemplateRows = `repeat(${this.sw},1fr)`
+            div2.append(div)
+        }
+
+    }
 }
-screenForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const width = document.getElementById('width').value;
-    const height = document.getElementById('height').value;
-
-    if (width && height) {
-        console.log(`Screen size set to: ${width}x${height}`);
-        alert(`Screen size applied: ${width}x${height}`);
-
-    }
-
-    let width1 = first.offsetWidth
-    let height1 = first.offsetHeight
-
-    for (let i = width; i < width1; i++) {
-
-        create(width1, height1, width, height)
-    }
-    for (let i = height; i < height1; i++) {
-
-        create(width1, height1, width, height)
-    }
-});
-screenForm.addEventListener('change', () => {
-    create(0, 0, 0, 0)
-
-
-})
