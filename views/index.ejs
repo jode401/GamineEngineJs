@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gamengine</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <%- include('maingame') %>
+
+
+        <body>
+            <div class="couc">
+                <form id="screenForm">
+                    <label>Screen size</label>
+
+                    <div class="custom">
+                        <input type="number" id="width" placeholder="Width" required max="64">
+                        <input type="number" id="height" placeholder="Height" required max="64">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Apply Settings</button>
+                </form>
+
+
+                <script src="/gamengine/app.js"></script>
+                <script src="ind.js"></script>
+        </body>
+
+</html>
